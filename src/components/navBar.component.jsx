@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useOnClickOutside } from 'useOnClickOutSide';
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
+  const ref = useRef();
+
+  useOnClickOutside(ref, dropdown, () => setDropdown(false));
 
   return (
-    <nav>
+    <nav ref={ref}>
       <ul>
         {/* other items here*/}
         <li>
