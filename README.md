@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <img src="" alt="logo" width="140"  height="auto" />
+  <img src="todo.svg" alt="logo" width="140"  height="auto" />
   <br/>
 
   <h3><b>To Do App Using React</b></h3>
