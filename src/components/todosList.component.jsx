@@ -1,7 +1,8 @@
 import TodoItem from "./todoItem.component";
+import { useTodosContext } from "context/todoContext";
 
-const TodosList = ({ todos, handleChange, deleTodo, updateTodo }) => {
-  console.log(todos);
+const TodosList = () => {
+  const { todos } = useTodosContext();
   return (
     <ul>
       {
@@ -9,9 +10,6 @@ const TodosList = ({ todos, handleChange, deleTodo, updateTodo }) => {
           <TodoItem
             key={todo.id}
             todo={todo}
-            handleChange={handleChange}
-            deleTodo={deleTodo}
-            updateTodo={updateTodo}
           />)
       }
     </ul>

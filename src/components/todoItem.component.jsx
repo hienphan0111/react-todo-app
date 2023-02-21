@@ -2,8 +2,11 @@ import styles from '../styles/TodoItem.module.css';
 import { useState } from 'react';
 import { FaTrash } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
+import { useTodosContext } from 'context/todoContext';
+import { useAuthContext } from 'context/AuthContext';
 
-const TodoItem = ({ todo, handleChange, deleTodo, updateTodo }) => {
+const TodoItem = ({ todo }) => {
+  const { user } = useAuthContext();
   const completedStyle = {
     fontStyle: 'italic',
     color: '#595959',
@@ -13,6 +16,7 @@ const TodoItem = ({ todo, handleChange, deleTodo, updateTodo }) => {
 
   const [editing, setEditing] = useState(false);
   const [updateTask, setUpdateTask] =useState(todo);
+  const { handleChange, deleTodo, updateTodo } = useTodosContext();
   
   const handleEditing = (e) => {
     setEditing(true);
@@ -51,9 +55,13 @@ const TodoItem = ({ todo, handleChange, deleTodo, updateTodo }) => {
         <span style={todo.completed ? completedStyle : null}>
           {todo.title}
         </span>
-        <button onClick={handleEditing}>
-          <AiFillEdit />
-        </button>
+        {
+          user && (
+            <button onClick={handleEditing}>
+              <AiFillEdit style={{ color: '#5e5e5e', fontSize: '16px' }} />
+            </button>
+          )
+        }
         <button
           onClick={()=>deleTodo(todo.id)}
         >
