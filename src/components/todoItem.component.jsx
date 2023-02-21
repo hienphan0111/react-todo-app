@@ -1,9 +1,9 @@
-import styles from '../styles/TodoItem.module.css';
 import { useState } from 'react';
-import { FaTrash } from "react-icons/fa";
-import { AiFillEdit } from "react-icons/ai";
+import { FaTrash } from 'react-icons/fa';
+import { AiFillEdit } from 'react-icons/ai';
 import { useTodosContext } from 'context/todoContext';
 import { useAuthContext } from 'context/AuthContext';
+import styles from '../styles/TodoItem.module.css';
 
 const TodoItem = ({ todo }) => {
   const { user } = useAuthContext();
@@ -15,10 +15,10 @@ const TodoItem = ({ todo }) => {
   };
 
   const [editing, setEditing] = useState(false);
-  const [updateTask, setUpdateTask] =useState(todo);
+  const [updateTask, setUpdateTask] = useState(todo);
   const { handleChange, deleTodo, updateTodo } = useTodosContext();
-  
-  const handleEditing = (e) => {
+
+  const handleEditing = () => {
     setEditing(true);
   };
 
@@ -36,12 +36,12 @@ const TodoItem = ({ todo }) => {
     });
   };
 
-  let viewMod = {};
-  let editMod = {};
+  const viewMod = {};
+  const editMod = {};
   if (editing) {
-    viewMod.display = 'none'
+    viewMod.display = 'none';
   } else {
-    editMod.display = 'none'
+    editMod.display = 'none';
   }
 
   return (
@@ -51,19 +51,20 @@ const TodoItem = ({ todo }) => {
           type="checkbox"
           onChange={() => handleChange(todo.id)}
           checked={todo.completed}
-        />   
+        />
         <span style={todo.completed ? completedStyle : null}>
           {todo.title}
         </span>
         {
           user && (
-            <button onClick={handleEditing}>
+            <button type="button" onClick={handleEditing}>
               <AiFillEdit style={{ color: '#5e5e5e', fontSize: '16px' }} />
             </button>
           )
         }
         <button
-          onClick={()=>deleTodo(todo.id)}
+          type="button"
+          onClick={() => deleTodo(todo.id)}
         >
           <FaTrash />
         </button>

@@ -29,6 +29,7 @@ const Navbar = () => {
     <>
       <nav className="narbar">
         <button
+          type="button"
           className="toggle"
           onClick={() => setNavbarOpen((prev) => !prev)}
         >
@@ -44,44 +45,31 @@ const Navbar = () => {
           )}
         </button>
         <ul className={`menu-nav${navbarOpen ? ' show-menu' : ''}`}>
-          {links.map((link) => {
-            return (
-              <Fragment key={link.text}>
-                {link.path === 'login' ? (
-                  !user && (
-                    <li>
-                      <NavLink
-                        to={link.path}
-                        onClick={() => setNavbarOpen(false)}
-                      >
-                        {link.text}
-                      </NavLink>
-                    </li>
-                  )
-                ) : link.path === 'profile' ? (
-                  user && (
-                    <li>
-                       <NavLink
-                        to={link.path}
-                        onClick={() => setNavbarOpen(false)}
-                      >
-                        {link.text}
-                      </NavLink>
-                    </li>
-                  )
-                ) : (
-                  <li>
-                    <NavLink
-                      to={link.path}
-                      onClick={() => setNavbarOpen(false)}
-                    >
-                      {link.text}
-                    </NavLink>
-                  </li>
-                )}
-              </Fragment>
-            );
-          })}
+          {links.map((link) => (
+            <Fragment key={link.text}>
+              { (link.path === 'login') ? (
+                !user && (
+                <li>
+                  <NavLink
+                    to={link.path}
+                    onClick={() => setNavbarOpen(false)}
+                  >
+                    {link.text}
+                  </NavLink>
+                </li>
+                )
+              ) : (
+                <li>
+                  <NavLink
+                    to={link.path}
+                    onClick={() => setNavbarOpen(false)}
+                  >
+                    {link.text}
+                  </NavLink>
+                </li>
+              )}
+            </Fragment>
+          ))}
           {
             !user && (
               <li className="log-in">
@@ -94,7 +82,7 @@ const Navbar = () => {
       {user && (
         <div className="logout">
           <p>{user}</p>
-          {<button onClick={handleLogout}>Logout</button>}
+          <button type="button" onClick={handleLogout}>Logout</button>
         </div>
       )}
     </>

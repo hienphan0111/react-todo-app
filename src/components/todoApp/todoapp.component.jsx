@@ -10,27 +10,28 @@ import Layout from 'components/layout.conponent';
 import SinglePage from 'routes/singlePage';
 import ProtectedRoute from 'components/protectedRoute.component';
 
-const TodoApp = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='about' element={<About />}>
-            <Route path=':slug' element={<SinglePage />} />
-          </Route>
-          <Route path='login' element={<Login />} />
-          <Route path='profile' element={
+const TodoApp = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />}>
+          <Route path=":slug" element={<SinglePage />} />
+        </Route>
+        <Route path="login" element={<Login />} />
+        <Route
+          path="profile"
+          element={(
             <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>}
-          />
-          <Route path='*' element={<NotMatch />} />
-        </Route>
-        <Route path='/' element={<About />} ></Route>
-      </Routes>
-    </BrowserRouter>
-  );
-};
+            </ProtectedRoute>
+        )}
+        />
+        <Route path="*" element={<NotMatch />} />
+      </Route>
+      <Route path="/" element={<About />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default TodoApp;
